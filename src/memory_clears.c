@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf.h                                              :+:    :+:            */
+/*   memory_clears.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/07 15:21:13 by dloustal      ########   odam.nl         */
+/*   Created: 2025/02/07 15:18:54 by dloustal      #+#    #+#                 */
+/*   Updated: 2025/02/07 15:20:42 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42/include/MLX42/MLX42.h"
-#include "../libft/libft.h"
+#include "fdf.h"
 
-// Input handling
-int	validate_map(char *file_name);
-int num_arguments(char *line);
+void	clear_array(char **args)
+{
+	int	i;
 
-// Memory clears
-void	clear_array(char **args);
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}

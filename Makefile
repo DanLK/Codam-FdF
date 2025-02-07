@@ -1,13 +1,16 @@
 NAME = fdf
 NAME_PRACTICE = practice
-SRC = input.c
+NAME_TEST = test
+SRC = input.c memory_clears.c
 SRC_MAIN = fdf.c
+SRC_TEST = test.c
 SRC_PRACTICE = practice.c
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_MAIN = $(SRC_MAIN:%.c=$(OBJ_DIR)/%.o)
+OBJ_TEST = $(SRC_TEST:%.c=$(OBJ_DIR)/%.o)
 OBJ_PRACTICE = $(SRC_PRACTICE:%.c=$(OBJ_DIR)/%.o)
 
 CFLAGS += -Wall -Werror -Wextra
@@ -22,6 +25,8 @@ all: libmlx $(NAME)
 
 practice: libmlx $(NAME_PRACTICE)
 
+test: $(NAME_TEST)
+
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
@@ -30,6 +35,9 @@ $(NAME): $(OBJ) $(OBJ_MAIN) $(LIBFT_NAME)
 
 $(NAME_PRACTICE): $(OBJ) $(OBJ_PRACTICE) $(LIBFT_NAME)
 	$(CC) -o $(NAME) $(OBJ) $(OBJ_PRACTICE) $(LIBS) $(LIBFT_NAME) $(HEADERS)
+
+$(NAME_TEST): $(OBJ) $(OBJ_TEST) $(LIBFT_NAME)
+	$(CC) -o $(NAME_TEST) $(OBJ) $(OBJ_TEST) $(LIBFT_NAME) 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(dir $@)
@@ -49,8 +57,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(NAME_PRACTICE)
+	rm -f $(NAME_TEST)
 	$(MAKE) -C $(LIBFT_PATH) fclean
 
 re: clean all
 
-.PHONY: all clean fclean re libmlx practice
+.PHONY: all clean fclean re libmlx practice test

@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf.h                                              :+:    :+:            */
+/*   test.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/07 15:21:13 by dloustal      ########   odam.nl         */
+/*   Created: 2025/02/07 14:06:13 by dloustal      #+#    #+#                 */
+/*   Updated: 2025/02/07 15:32:06 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42/include/MLX42/MLX42.h"
-#include "../libft/libft.h"
+#include "fdf.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-// Input handling
-int	validate_map(char *file_name);
-int num_arguments(char *line);
+int	main(int argc, char **argv)
+{
+	int		map_valid;
 
-// Memory clears
-void	clear_array(char **args);
+	if (argc != 2)
+	{
+		ft_printf("Must pass exactly one argument\n");
+		return (EXIT_FAILURE);
+	}
+	map_valid = validate_map(argv[1]);
+	ft_printf("%d\n", map_valid);
+	return (0);
+}
