@@ -6,11 +6,11 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 16:04:11 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/06 17:55:52 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/07 12:37:20 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./MLX42/include/MLX42/MLX42.h"
+#include "fdf.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
