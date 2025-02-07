@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   input.c                                            :+:    :+:            */
+/*   init_points.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/02/06 17:46:40 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/07 17:02:25 by dloustal      ########   odam.nl         */
+/*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
+/*   Updated: 2025/02/07 17:00:13 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,49 @@
 #include <stdio.h>
 #include <unistd.h>
 
+// t_3dpoint	*new_point(int x, int y, int z)
+// {
+// 	t_3dpoint	*p;
 
-int num_arguments(char *line)
+// 	p = (t_3dpoint *)malloc(sizeof(t_3dpoint));
+// 	if (!p)
+// 		return (NULL);
+// 	p->x = x;
+// 	p->y = y;
+// 	p->z = z;
+// 	return (p);
+// }
+
+int	*new_3dcoord(int x, int y, int z)
 {
-	int		i;
-	char	**points;
+	int	*p;
 
-	i = 0;
-	points = ft_split(line, ' ');
-	while (points[i])
-		i++;
-	clear_array(points);
-	return (i);
+	p = (int *)malloc(3 * sizeof(int));
+	if (!p)
+		return (NULL);
+	p[0] = x;
+	p[1] = y;
+	p[2] = z;
+	return (p);
 }
 
-int	validate_map(char *file_name, int *size_x, int *size_y)
+int	**get_points_3d(char *file_name, int size_x, int size_y)
 {
-	int		fd;
-	char	*line;
+	int	**points;
+	int			fd;
 
+	if (!file_name)
+		return (NULL);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 3)
 	{
 		perror("Error reading map");
 		exit(EXIT_FAILURE);
 	}
-	line = get_next_line(fd);
-	*size_y = num_arguments(line);
-	*size_x = 0;
-	while (line)
-	{
-		if (num_arguments(line) != *size_y)
-		{
-			ft_printf("The map is not rectangular\n");
-			return (close(fd), free(line), 0);
-		}
-		free(line);
-		line = get_next_line(fd);
-		*size_x += 1;
-	}
-	return (close(fd), free(line), 1);
+	points = (int **)malloc((size_x * size_y) * sizeof(int *));
+	if (!points)
+		return (NULL);
+	
 }
+
+
