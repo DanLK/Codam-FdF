@@ -23,3 +23,8 @@ Must use an algorithm. Some options are:
 ## Extra Resources, maybe useful
 
 [Fundamental Math for Game Developers](https://pikuma.com/blog/math-for-game-developers)
+
+
+## Calculators
+
+[Wolfram alpha. Calculate the isometric transformation of a point](https://www.wolframalpha.com/input?i2d=true&i=%7B%7Bcos+%5C%2840%2930%5C%2841%29%2Ccos%5C%2840%2932%5C%2841%29%2Ccos%5C%2840%2928%5C%2841%29%7D%2C%7Bsin%5C%2840%2930%5C%2841%29%2Csin%5C%2840%2932%5C%2841%29%2Csin%5C%2840%2928%5C%2841%29%7D%7D%7B%7B4%7D%2C%7B2%7D%2C%7B0%7D%7D)

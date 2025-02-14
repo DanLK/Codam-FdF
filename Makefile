@@ -1,7 +1,7 @@
 NAME = fdf
 NAME_PRACTICE = practice
 NAME_TEST = test
-SRC = input.c memory_clears.c init_points.c debug.c
+SRC = input.c memory_clears.c init_points.c init_points_utils.c debug.c
 SRC_MAIN = fdf.c
 SRC_TEST = test.c
 SRC_PRACTICE = practice.c
@@ -31,13 +31,13 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(NAME): $(OBJ) $(OBJ_MAIN) $(LIBFT_NAME)
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(LIBS) $(LIBFT_NAME) $(HEADERS)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(LIBS) $(LIBFT_NAME) $(HEADERS) -lm
 
 $(NAME_PRACTICE): $(OBJ) $(OBJ_PRACTICE) $(LIBFT_NAME)
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_PRACTICE) $(LIBS) $(LIBFT_NAME) $(HEADERS)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_PRACTICE) $(LIBS) $(LIBFT_NAME) $(HEADERS) -lm
 
 $(NAME_TEST): $(OBJ) $(OBJ_TEST) $(LIBFT_NAME)
-	$(CC) -o $(NAME_TEST) $(OBJ) $(OBJ_TEST) $(LIBFT_NAME) 
+	$(CC) -o $(NAME_TEST) $(OBJ) $(OBJ_TEST) $(LIBFT_NAME) -lm
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/08 13:58:09 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/01/30 16:46:35 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 14:47:59 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 int		ft_atoi(const char *nptr);
+
+int		ft_atoi_base(char *str, char *base);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 
