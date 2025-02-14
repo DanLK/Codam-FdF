@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:28 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/11 16:41:47 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 17:30:56 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#define HEIGHT 1024
+#define WIDTH 1536
 
 int	main(int argc, char **argv)
 {
 	int	fd;
-	int	size_x;
-	int	size_y;
+	int	size;
+	t_env	env;
 
 	if (argc != 2)
 	{
@@ -33,12 +35,12 @@ int	main(int argc, char **argv)
 		perror("Error reading the file");
 		exit(EXIT_FAILURE);
 	}
-	if (!validate_map(argv[1], &size_x, &size_y))
+	if (!validate_map(argv[1], &size))
 	{
 		ft_printf("Invalid map\n");
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
-	ft_printf("%d\n", fd);
-	close(fd);
+	env = init_env(fd, size);
+	clear_environment(env);
 	return (EXIT_SUCCESS);
 }

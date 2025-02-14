@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 15:13:36 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 16:50:00 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**get_map_line(int fd)
 	return (coord_line);
 }
 
-t_pixel	**transform_points(t_3dpoint **arr_3d, double a, int size)
+t_pixel	**iso_transform(t_3dpoint **arr_3d, double a, int size)
 {
 	t_pixel	**points;
 	t_3dpoint	*p;
@@ -102,6 +102,6 @@ t_pixel	**transform_points(t_3dpoint **arr_3d, double a, int size)
 				+ p->z * sin(dtr(a) - 2));
 		i++;
 	}
-	clear_3d_grid(arr_3d, size);
+	// clear_3d_grid(arr_3d, size);
 	return (points);
 }

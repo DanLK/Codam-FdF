@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 16:04:11 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 15:09:23 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 15:19:43 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int32_t	main(int argc, char **argv)
 	ft_printf("Number of points: %d\n", size_x * size_y);
 	points = get_points_3d(fd, size_x * size_y);
 	print_3d_array(points, size_x * size_y);
-	arr_2d = transform_points(points, 30, size_x * size_y);
+	arr_2d = iso_transform(points, 30, size_x * size_y);
 	ft_printf("\n");
 	print_2d_array(arr_2d, size_x * size_y);
 	get_x_minmax(arr_2d, size_x * size_y, &x_min, &x_max);

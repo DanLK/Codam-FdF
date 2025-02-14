@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/11 18:35:45 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 14:58:44 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 17:19:19 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,16 @@ int	get_color(char *str)
 	else
 		return (color);
 	return (ft_atoi_base(str, "0123456789abcdef"));
+}
+
+t_env	init_env(int fd, int size)
+{
+	t_env	env;
+
+	env.size = size;
+	env.map_coord = get_points_3d(fd, size);
+	env.points = iso_transform(env.map_coord, 30, size);
+	get_x_minmax(env.points, size, &env.x_min, &env.x_max);
+	get_y_minmax(env.points, size, &env.y_min, &env.y_max);
+	return (env);
 }

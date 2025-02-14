@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 14:59:49 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 17:30:14 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,40 @@ typedef struct s_pixel
 
 typedef struct	s_env
 {
-	t_pixel	**points;
+	t_3dpoint	**map_coord;
+	t_pixel		**points;
 	int			size;
+	double		x_min;
+	double		x_max;
+	double		y_min;
+	double		y_max;
+	int			height;
+	int			width;
 }		t_env;
 
-// Input handling
-int			validate_map(char *file_name, int *size_x, int *size_y);
+// Input validation
+int			validate_map(char *file_name, int *size);
 int			num_arguments(char *line);
-
-// Memory clears
-void		clear_array(char **args);
-void		clear_3d_grid(t_3dpoint **points, int size);
-void		clear_2d_grid(t_pixel **points, int size);
 
 // Init points
 t_3dpoint	*new_3dpoint(int x, int y, int z);
 t_pixel		*new_pixel(double x, double y);
 char		**get_map_line(int fd);
 t_3dpoint	**get_points_3d(int fd, int size);
-t_pixel	**transform_points(t_3dpoint **arr_3d, double a, int size);
-
-
+t_pixel		**iso_transform(t_3dpoint **arr_3d, double a, int size);
 
 // Init points utils
 double		dtr(double alpha);
 void		get_x_minmax(t_pixel **points, int size, double *min, double *max);
 void		get_y_minmax(t_pixel **points, int size, double *min, double *max);
 int			get_color(char *str);
+t_env		init_env(int fd, int size);
+
+// Memory clears
+void		clear_array(char **args);
+void		clear_3d_grid(t_3dpoint **points, int size);
+void		clear_2d_grid(t_pixel **points, int size);
+void		clear_environment(t_env env);
 
 // Debug
 void		print_3d_point(t_3dpoint p);

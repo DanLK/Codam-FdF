@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:18:54 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 14:17:49 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/14 16:51:19 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ void	clear_2d_grid(t_pixel **points, int size)
 		p = points[i];
 	}
 	free(points);
+}
+
+void	clear_environment(t_env env)
+{
+	clear_3d_grid(env.map_coord, env.size);
+	clear_2d_grid(env.points, env.size);
 }
