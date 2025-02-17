@@ -6,26 +6,31 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/14 15:26:21 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 15:36:05 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/17 14:32:54 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 
-t_pixel *scale(t_pixel *point, int w, int h)
+/* Scales and centers the points */
+t_pixel *scale(t_pixel *point, t_env env)
 {
 	t_pixel	*new;
-	double	x_min;
-	double	x_max;
-	double	y_min;
-	double	y_max;
+	double	sf;
+	double	offx;
+	double	offy;
 
 	if (!point)
 		return (NULL);
-	get_x_minmax
-	new = new_pixel((point->x - x_min) * ((w - 1) / (x_max - x_min)),
-		(point->y - y_min) * (h/(y_max - y_min)));
+	sf = fmin((env.width - 1) / (env.x_max - env.x_min), (env.height - 1) /
+		(env.y_max - env.y_min));
+	offx = ((env.width - 1) - (env.x_max - env.x_min) * sf) / 2;
+	offy = ((env.height - 1) - (env.y_max - env.y_min) * sf) / 2;
+	new = new_pixel((point->x - env.x_min) * sf + offx, (point->y - env.y_min) *
+		sf + offy);
 	if (!new)
 		return (NULL);
-	
+	return (new);
 }
+

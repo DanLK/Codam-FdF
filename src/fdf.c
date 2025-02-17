@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:28 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 17:30:56 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/17 12:48:47 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	env = init_env(fd, size);
+	paint_map(env);
 	clear_environment(env);
 	return (EXIT_SUCCESS);
 }

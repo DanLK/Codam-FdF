@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 16:04:11 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 15:19:43 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/17 14:06:09 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int32_t	main(int argc, char **argv)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int			size_x;
-	int			size_y;
+	int			size;
 	t_3dpoint	**points;
 	t_pixel	**arr_2d;
 	int			i = 0;
@@ -78,28 +77,30 @@ int32_t	main(int argc, char **argv)
 		perror("Error reading the file");
 		exit(EXIT_FAILURE);
 	}
-	if (!validate_map(argv[1], &size_x, &size_y))
+	if (!validate_map(argv[1], &size))
 	{
 		ft_printf("Invalid map\n");
 		exit(EXIT_FAILURE);
 	}
-	ft_printf("Number of points: %d\n", size_x * size_y);
-	points = get_points_3d(fd, size_x * size_y);
-	print_3d_array(points, size_x * size_y);
-	arr_2d = iso_transform(points, 30, size_x * size_y);
+	ft_printf("Number of points: %d\n", size);
+	points = get_points_3d(fd, size);
+	print_3d_array(points, size);
+	arr_2d = iso_transform(points, 30, size);
 	ft_printf("\n");
-	print_2d_array(arr_2d, size_x * size_y);
-	get_x_minmax(arr_2d, size_x * size_y, &x_min, &x_max);
-	get_y_minmax(arr_2d, size_x * size_y, &y_min, &y_max);
+	print_2d_array(arr_2d, size);
+	get_x_minmax(arr_2d, size, &x_min, &x_max);
+	get_y_minmax(arr_2d, size, &y_min, &y_max);
 	printf("x_min: %f    x_max: %f\n", x_min, x_max);
 	printf("y_min: %f    y_max: %f\n", y_min, y_max);
 	ft_printf("\nScaled points:\n");
-	while (i < size_x * size_y)
+	while (i < size)
 	{
-		mlx_put_pixel(img, (arr_2d[i]->x - x_min) * ((WIDTH - 1) / (x_max - x_min)), (arr_2d[i]->y - y_min) * (HEIGHT/(y_max - y_min)), 0xFFFFFFFF);
-		printf("(%f, %f)\n", (arr_2d[i]->x - x_min) * (WIDTH - 1 ) / (x_max - x_min), (arr_2d[i]->y - y_min) * (HEIGHT/(y_max - y_min)));
+		mlx_put_pixel(img, (arr_2d[i]->x - x_min) * ((WIDTH - 1) / (x_max - x_min)), (arr_2d[i]->y - y_min) * ((HEIGHT - 1)/(y_max - y_min)), 0xFFFFFFFF);
+		printf("(%f, %f)\n", (arr_2d[i]->x - x_min) * (WIDTH - 1 ) / (x_max - x_min), (arr_2d[i]->y - y_min) * ((HEIGHT - 1)/(y_max - y_min)));
 		i++;
 	}
+	clear_2d_grid(arr_2d, size);
+	clear_3d_grid(points, size);
 	// mlx_loop_hook(mlx, a_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

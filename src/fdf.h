@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 17:30:14 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/17 12:48:32 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void		get_x_minmax(t_pixel **points, int size, double *min, double *max);
 void		get_y_minmax(t_pixel **points, int size, double *min, double *max);
 int			get_color(char *str);
 t_env		init_env(int fd, int size);
+
+// Scale points
+t_pixel 	*scale(t_pixel *point, t_env env);
+
+// Paint map
+void		paint_map(t_env env);
 
 // Memory clears
 void		clear_array(char **args);
