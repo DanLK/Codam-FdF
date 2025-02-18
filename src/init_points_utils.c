@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/11 18:35:45 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/17 17:15:40 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/18 16:31:57 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,16 @@ int	get_color(char *str)
 	return (ft_atoi_base(str, "0123456789abcdef"));
 }
 
-t_env	init_env(int fd, int size)
+t_env	init_env(int fd, int size_x, int size_y)
 {
 	t_env	env;
 
-	env.size = size;
-	env.map_coord = get_points_3d(fd, size);
-	env.points = iso_transform(env.map_coord, 30, size);
-	get_x_minmax(env.points, size, &env.x_min, &env.x_max);
-	get_y_minmax(env.points, size, &env.y_min, &env.y_max);
+	env.size_x = size_x;
+	env.size_y = size_y;
+	env.map_coord = get_points_3d(fd, size_x * size_y);
+	env.points = iso_transform(env.map_coord, 30, size_x * size_y);
+	get_x_minmax(env.points, size_x * size_y, &env.x_min, &env.x_max);
+	get_y_minmax(env.points, size_x * size_y, &env.y_min, &env.y_max);
 	env.width = 2048;
 	env.height = 1024 + 521;
 	return (env);
