@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 16:50:00 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/20 14:08:03 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ t_pixel	*new_pixel(double x, double y)
 	return (p);
 }
 
+// static void	print_line(char **array)
+// {
+// 	int		i = 0;
+
+// 	while (array[i])
+// 	{
+// 		// ft_printf("%s ", array[i]);
+// 		i++;
+// 	}
+// 	ft_printf("%d\n", i);
+// }
+
 t_3dpoint	**get_points_3d(int fd, int size)
 {
 	t_3dpoint	**points;
@@ -57,6 +69,7 @@ t_3dpoint	**get_points_3d(int fd, int size)
 	i = 0;
 	while (line)
 	{
+		// print_line(line);
 		coord_x = 0;
 		while (line[coord_x])
 		{

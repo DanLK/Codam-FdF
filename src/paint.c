@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 12:34:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/18 17:55:33 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/20 17:15:49 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,11 @@ void	paint_map(t_env env)
 	{
 		pixel = scale(env.points[i], env);
 		mlx_put_pixel(env.img, pixel->x, pixel->y, 0xFFFFFFFF);
-		// print_2d_point(*pixel);
 		free(pixel);
 		i++;
 	}
-	ft_printf("Finished drawing points...\n");
-	ft_printf("Map dimensions: %d x %d\n", env.size_x, env.size_y);
-	// dl(env, scale(env.points[0], env), scale(env.points[1], env));
 	draw_horizontal(env);
-	// draw_vertical(env);
+	draw_vertical(env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:46:40 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/18 16:46:13 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/20 17:15:07 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ int num_arguments(char *line)
 	clear_array(points);
 	return (i);
 }
+
+static int	validate_extension(char *file_name)
+{
+	int	len;
+	int	valid;
+	
+	len = ft_strlen(file_name);
+	valid = file_name[len - 4] == '.' && file_name[len - 3] == 'f'
+			&& file_name[len - 2] == 'd' && file_name[len - 1] == 'f';
+	if (!valid)
+	{
+		ft_printf("File extension invalid\n");
+		exit(EXIT_FAILURE);
+	}
+	return (valid);
+}
+
 
 int	validate_map(char *file_name, int *size_x, int *size_y)
 {
@@ -54,5 +71,5 @@ int	validate_map(char *file_name, int *size_x, int *size_y)
 		line = get_next_line(fd);
 		*size_y += 1;
 	}
-	return (close(fd), free(line), 1);
+	return (close(fd), free(line), 1 && validate_extension(file_name));
 }

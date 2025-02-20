@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 17:17:12 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/18 17:58:01 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/20 15:46:43 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,17 @@
 #include <math.h>
 #include <stdio.h>
 
-// void	dda(t_env env, t_pixel *p0, t_pixel *p1)
-// {
-// 	double	dx;
-// 	double	dy;
-// 	int		steps;
-// 	double	x;
-// 	double	y;
-
-// 	if (!p0 || !p1)
-// 		return ;
-// 	dx = p1->x - p0->x;
-// 	dy = p1->y - p0->y;
-// 	if (abs((int)dx) > abs((int)dy))
-// 		steps = abs((int)dx);
-// 	else
-// 		steps = abs((int)dy);
-// 	x = p0->x;
-// 	y = p0->y;
-// 	while (steps > 0)
-// 	{
-// 		mlx_put_pixel(env.img, x, y, 0xFFFFFFFF);
-// 		x += dx / steps;
-// 		y += dy / steps;
-// 		steps--;
-// 	}
-// }
-
 /* Bresenham*/
 void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 {
-	double	dx;
-	double	dy;
 	double	err;
 	double	sx;
 	double	sy;
-	double	x;
-	double	y;
+	t_pixel	p;
 
-	x = p0->x;
-	y = p0->y;
-	dx = fabs(p1->x - p0->x);
-	dy = - fabs(p1->y - p0->y);
+	p.x = p0->x;
+	p.y = p0->y;
+	err = fabs(p1->x - p0->x) - fabs(p1->y - p0->y);
 	if (p0->x < p1->x)
 		sx = 1;
 	else
@@ -64,23 +33,24 @@ void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 		sy = 1;
 	else
 		sy = -1;
-	err = dx + dy;
 	while (true)
 	{
-		mlx_put_pixel(env.img, x, y, 0xFFFFFFFF);
-		if (err * 10 >= dy)
+		if (p.y < p0->y)
+			break ;
+		mlx_put_pixel(env.img, p.x, p.y, 0xFFFFFFFF);
+		if (err * 2 >= - fabs(p1->y - p0->y))
 		{
-			if (sx * x >= p1->x)
+			if (sx * p.x >= p1->x)
 				break ;
-			err += dy;
-			x += sx;
+			err += - fabs(p1->y - p0->y);
+			p.x += sx;
 		}
-		if (err * 10 <= dx)
+		if (err * 2 <= fabs(p1->x - p0->x))
 		{
-			if (sy * y >= p1->y)
+			if (sy * p.y >= p1->y)
 				break ;
-			err += dx;
-			y += sy;
+			err += fabs(p1->x - p0->x);
+			p.y += sy;
 		}
 	}
 }
@@ -88,20 +58,19 @@ void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 void	dl(t_env env, t_pixel *p0, t_pixel *p1)
 {
 	if (!p0 || !p1)
-	{
-		ft_printf("One of the points is null\n");
 		return ;
-	}
-	if (p0->x > p1->x && p0->y > p1->y)
-		draw_line(env, p1, p0);
-	else
+	if (p0->x < p1->x || p0->y < p1->y)
 		draw_line(env, p0, p1);
+	else
+		draw_line(env, p1, p0);
 }
 
 void	draw_horizontal(t_env env)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_pixel *p0;
+	t_pixel	*p1;
 
 	i = 0;
 	while (i < env.size_y)
@@ -109,8 +78,12 @@ void	draw_horizontal(t_env env)
 		j = 0;
 		while (j < env.size_x - 1)
 		{
-		// dl(env, scale(env.points[j + i * env.size_y], env), scale(env.points[j + i * env.size_y + 1], env));
-			ft_printf("(%d, %d)\n", j + i * env.size_y, j + i * env.size_y + 1);
+			p0 = scale(env.points[j + i * env.size_x], env);
+			p1 = scale(env.points[j + i * env.size_x + 1], env); // PROTECT!??
+			dl(env, p0, p1);
+			// ft_printf("(%d, %d)\n", j + i * env.size_x, j + i * env.size_x + 1);
+			free(p0);
+			free(p1);
 			j++;
 		}
 		i++;
@@ -119,8 +92,10 @@ void	draw_horizontal(t_env env)
 
 void	draw_vertical(t_env env)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_pixel	*p0;
+	t_pixel	*p1;
 
 	i = 0;
 	while (i < env.size_y -1)
@@ -128,8 +103,12 @@ void	draw_vertical(t_env env)
 		j = 0;
 		while (j < env.size_x)
 		{
-			dl(env, scale(env.points[j + i * env.size_x], env),
-				scale(env.points[j + (i + 1) * env.size_x], env));
+			p0 = scale(env.points[j + i * env.size_x], env);
+			p1 = scale(env.points[j + (i + 1) * env.size_x], env);
+			dl(env, p0, p1);
+			// ft_printf("(%d, %d)\n", j + i * env.size_x, j + (i + 1) * env.size_x);
+			free(p0);
+			free(p1);
 			j++;
 		}
 		i++;
