@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/20 14:08:03 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/21 16:29:41 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <math.h>
 
-t_3dpoint	*new_3dpoint(int x, int y, int z)
+t_3dpoint	*new_3dpoint(int x, int y, int z, uint32_t color)
 {
 	t_3dpoint	*p;
 
@@ -26,10 +26,11 @@ t_3dpoint	*new_3dpoint(int x, int y, int z)
 	p->x = x;
 	p->y = y;
 	p->z = z;
+	p->color = color;
 	return (p);
 }
 
-t_pixel	*new_pixel(double x, double y)
+t_pixel	*new_pixel(double x, double y, uint32_t color)
 {
 	t_pixel	*p;
 
@@ -38,20 +39,9 @@ t_pixel	*new_pixel(double x, double y)
 		return (NULL);
 	p->x = x;
 	p->y = y;
+	p->color = color;
 	return (p);
 }
-
-// static void	print_line(char **array)
-// {
-// 	int		i = 0;
-
-// 	while (array[i])
-// 	{
-// 		// ft_printf("%s ", array[i]);
-// 		i++;
-// 	}
-// 	ft_printf("%d\n", i);
-// }
 
 t_3dpoint	**get_points_3d(int fd, int size)
 {
@@ -69,11 +59,10 @@ t_3dpoint	**get_points_3d(int fd, int size)
 	i = 0;
 	while (line)
 	{
-		// print_line(line);
 		coord_x = 0;
 		while (line[coord_x])
 		{
-			points[i++] = new_3dpoint(coord_x, coord_y, ft_atoi(line[coord_x]));
+			points[i++] = new_3dpoint(coord_x, coord_y, ft_atoi(line[coord_x]), get_color(line[coord_x]));
 			coord_x++;
 		}
 		coord_y++;
@@ -112,9 +101,8 @@ t_pixel	**iso_transform(t_3dpoint **arr_3d, double a, int size)
 		points[i] = new_pixel((p->x * cos(dtr(a))) + (p->y * cos(dtr(a) + 2))
 				+ (p->z * cos(dtr(a) - 2)),
 				p->x * sin(dtr(a)) + p->y * sin(dtr(a) + 2)
-				+ p->z * sin(dtr(a) - 2));
+				+ p->z * sin(dtr(a) - 2), p->color);
 		i++;
 	}
-	// clear_3d_grid(arr_3d, size);
 	return (points);
 }

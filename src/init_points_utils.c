@@ -6,12 +6,13 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/11 18:35:45 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/20 15:00:15 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/21 16:24:24 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
+#include <stdlib.h>
 
 /* Degrees to radians*/
 double	dtr(double alpha)
@@ -61,28 +62,22 @@ void	get_y_minmax(t_pixel **points, int size, double *min, double *max)
 	}
 }
 
-int	get_color(char *str)
+uint32_t	get_color(char *str)
 {
-	int	color;
+	uint32_t	color;
 
 	if (!str)
 		return (-1);
-	color = 0xFFFFFFFF;
 	while (ft_isdigit(*str))
 		str++;
-	if (*str == ',')
+	if (!*str)
+		str = "0xFFFFFFFF";
+	else if (*str == ',')
 		str++;
-	else
-		return (color);
-	if (*str == '0')
-		str++;
-	else
-		return (color);
-	if (*str == 'x')
-		str++;
-	else
-		return (color);
-	return (ft_atoi_base(str, "0123456789abcdef"));
+	if (!*str)
+		return (-1);
+	color = (uint32_t)strtoul(str, NULL, 16);
+	return (color);
 }
 
 t_env	init_env(int fd, int size_x, int size_y)

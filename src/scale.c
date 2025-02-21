@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/14 15:26:21 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/17 14:32:54 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/21 16:42:00 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_pixel *scale(t_pixel *point, t_env env)
 	offx = ((env.width - 1) - (env.x_max - env.x_min) * sf) / 2;
 	offy = ((env.height - 1) - (env.y_max - env.y_min) * sf) / 2;
 	new = new_pixel((point->x - env.x_min) * sf + offx, (point->y - env.y_min) *
-		sf + offy);
+		sf + offy, point->color);
 	if (!new)
 		return (NULL);
 	return (new);

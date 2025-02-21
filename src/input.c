@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:46:40 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/20 17:15:07 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/21 14:06:37 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	validate_map(char *file_name, int *size_x, int *size_y)
 	char	*line;
 
 	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || !validate_extension(file_name))
 	{
 		perror("Error reading map");
 		exit(EXIT_FAILURE);
@@ -71,5 +71,5 @@ int	validate_map(char *file_name, int *size_x, int *size_y)
 		line = get_next_line(fd);
 		*size_y += 1;
 	}
-	return (close(fd), free(line), 1 && validate_extension(file_name));
+	return (close(fd), free(line), 1);
 }

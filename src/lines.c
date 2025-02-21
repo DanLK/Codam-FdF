@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 17:17:12 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/20 15:46:43 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/21 16:54:07 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,39 @@
 #include <math.h>
 #include <stdio.h>
 
+int	rounded(double n)
+{
+	return ((int)(n + 0.5));
+}
+
 /* Bresenham*/
 void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 {
-	double	err;
-	double	sx;
-	double	sy;
+	int	err;
 	t_pixel	p;
 
-	p.x = p0->x;
-	p.y = p0->y;
-	err = fabs(p1->x - p0->x) - fabs(p1->y - p0->y);
-	if (p0->x < p1->x)
-		sx = 1;
-	else
-		sx = -1;
-	if (p0->y < p1->y)
-		sy = 1;
-	else
-		sy = -1;
+	p.x = rounded(p0->x);
+	p.y = rounded(p0->y);
+	err = abs(rounded(p1->x) - rounded(p0->x)) -
+	abs(rounded(p1->y) - rounded(p0->y));
 	while (true)
 	{
-		if (p.y < p0->y)
-			break ;
 		mlx_put_pixel(env.img, p.x, p.y, 0xFFFFFFFF);
-		if (err * 2 >= - fabs(p1->y - p0->y))
+		if (err * 2 > - abs(rounded(p1->y) - rounded(p0->y)))
 		{
-			if (sx * p.x >= p1->x)
+			if (p.x == rounded(p1->x))
 				break ;
-			err += - fabs(p1->y - p0->y);
-			p.x += sx;
+			err -= abs(rounded(p1->y) - rounded(p0->y));
+			p.x += (rounded(p0->x) < rounded(p1->x));
+			p.x -= (rounded(p0->x) > rounded(p1->x));
 		}
-		if (err * 2 <= fabs(p1->x - p0->x))
+		if (err * 2 < abs(rounded(p1->x) - rounded(p0->x)))
 		{
-			if (sy * p.y >= p1->y)
+			if (p.y == rounded(p1->y))
 				break ;
-			err += fabs(p1->x - p0->x);
-			p.y += sy;
+			err += abs(rounded(p1->x) - rounded(p0->x));
+			p.y += (rounded(p0->y) < rounded(p1->y));
+			p.y -= (rounded(p0->y) > rounded(p1->y));
 		}
 	}
 }
@@ -59,10 +55,10 @@ void	dl(t_env env, t_pixel *p0, t_pixel *p1)
 {
 	if (!p0 || !p1)
 		return ;
-	if (p0->x < p1->x || p0->y < p1->y)
-		draw_line(env, p0, p1);
-	else
-		draw_line(env, p1, p0);
+	// if (p0->y < p1->y)
+	draw_line(env, p0, p1);
+	// else
+	// 	draw_line(env, p1, p0);
 }
 
 void	draw_horizontal(t_env env)
