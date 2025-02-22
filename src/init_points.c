@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/21 16:29:41 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:53:02 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_3dpoint	**get_points_3d(int fd, int size)
 		coord_x = 0;
 		while (line[coord_x])
 		{
-			points[i++] = new_3dpoint(coord_x, coord_y, ft_atoi(line[coord_x]), get_color(line[coord_x]));
+			points[i++] = new_3dpoint(coord_x, coord_y, ft_atoi(line[coord_x]),
+					get_color(line[coord_x]));
 			coord_x++;
 		}
 		coord_y++;
@@ -85,7 +86,7 @@ char	**get_map_line(int fd)
 
 t_pixel	**iso_transform(t_3dpoint **arr_3d, double a, int size)
 {
-	t_pixel	**points;
+	t_pixel		**points;
 	t_3dpoint	*p;
 	int			i;
 

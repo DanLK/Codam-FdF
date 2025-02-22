@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:46:40 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/21 14:06:37 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:54:16 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
-int num_arguments(char *line)
+int	num_arguments(char *line)
 {
 	int		i;
 	char	**points;
@@ -33,10 +32,10 @@ static int	validate_extension(char *file_name)
 {
 	int	len;
 	int	valid;
-	
+
 	len = ft_strlen(file_name);
 	valid = file_name[len - 4] == '.' && file_name[len - 3] == 'f'
-			&& file_name[len - 2] == 'd' && file_name[len - 1] == 'f';
+		&& file_name[len - 2] == 'd' && file_name[len - 1] == 'f';
 	if (!valid)
 	{
 		ft_printf("File extension invalid\n");
@@ -44,7 +43,6 @@ static int	validate_extension(char *file_name)
 	}
 	return (valid);
 }
-
 
 int	validate_map(char *file_name, int *size_x, int *size_y)
 {

@@ -1,7 +1,8 @@
 NAME = fdf
 NAME_PRACTICE = practice
 NAME_TEST = test
-SRC = input.c memory_clears.c init_points.c init_points_utils.c scale.c paint.c lines.c debug.c
+SRC = input.c memory_clears.c init_points.c init_points_utils.c \
+	scale.c paint.c lines.c color.c debug.c
 SRC_MAIN = fdf.c
 SRC_TEST = test.c
 SRC_PRACTICE = practice.c

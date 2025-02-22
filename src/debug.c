@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:55:59 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 14:41:17 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:51:42 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_3d_point(t_3dpoint p)
 
 void	print_2d_point(t_pixel p)
 {
-	printf("(%f, %f)\n", p.x, p.y);
+	printf("(%f, %f) -- %d\n", p.x, p.y, p.color);
 }
 
 void	print_3d_array(t_3dpoint **p, int size)
@@ -46,6 +46,7 @@ void	print_2d_array(t_pixel **p, int size)
 		i++;
 	}
 }
+
 void	print_pixels(t_pixel **p, int size)
 {
 	int	i;

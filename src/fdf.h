@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/21 16:29:04 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 18:05:02 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_pixel
 	uint32_t		color;
 }		t_pixel;
 
-typedef struct	s_env
+typedef struct s_env
 {
 	t_3dpoint	**map_coord;
 	t_pixel		**points;
@@ -58,23 +58,26 @@ t_pixel		**iso_transform(t_3dpoint **arr_3d, double a, int size);
 double		dtr(double alpha);
 void		get_x_minmax(t_pixel **points, int size, double *min, double *max);
 void		get_y_minmax(t_pixel **points, int size, double *min, double *max);
-uint32_t	get_color(char *str);
 t_env		init_env(int fd, int size_x, int size_y);
 
 // Scale points
-t_pixel 	*scale(t_pixel *point, t_env env);
+t_pixel		*scale(t_pixel *point, t_env env);
 
 // Paint map
 void		paint_map(t_env env);
-void 		esc_hook(mlx_key_data_t keydata, void* param);
+void		esc_hook(mlx_key_data_t keydata, void *param);
 
 // Draw lines
-// void		dda(t_env env, t_pixel *p0, t_pixel *p1);
 void		draw_line(t_env env, t_pixel *p0, t_pixel *p1);
-void		dl(t_env env, t_pixel *p0, t_pixel *p1);
 void		draw_horizontal(t_env env);
 void		draw_vertical(t_env env);
 int			rounded(double n);
+
+//Color
+int			get_color(char *str);
+int			str_to_color(char *str);
+int			get_color_component(char *str, int index);
+char		*str_to_upper(char *str);
 
 // Memory clears
 void		clear_array(char **args);

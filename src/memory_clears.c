@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:18:54 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/20 10:26:04 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:52:07 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	clear_3d_grid(t_3dpoint **points, int size)
 void	clear_2d_grid(t_pixel **points, int size)
 {
 	t_pixel	*p;
-	int			i;
+	int		i;
 
 	if (!points)
 		return ;

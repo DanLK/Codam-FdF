@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:28 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/21 16:24:04 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:55:55 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 int	main(int argc, char **argv)
 {
-	int	fd;
-	int	size_x;
-	int	size_y;
+	int		fd;
+	int		size_x;
+	int		size_y;
 	t_env	env;
 
 	if (argc != 2)

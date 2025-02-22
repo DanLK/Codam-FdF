@@ -6,14 +6,14 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 12:34:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/21 16:53:26 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/22 17:49:05 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-static void graphics_error(void)
+static void	graphics_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -35,8 +35,8 @@ void	paint_map(t_env env)
 	while (i < env.size_x * env.size_y)
 	{
 		pixel = scale(env.points[i], env);
-		mlx_put_pixel(env.img, rounded(pixel->x), rounded(pixel->y), pixel->color);
-		print_2d_point(*pixel);
+		mlx_put_pixel(env.img, rounded(pixel->x), rounded(pixel->y),
+			pixel->color);
 		free(pixel);
 		i++;
 	}
@@ -47,7 +47,7 @@ void	paint_map(t_env env)
 	mlx_terminate(mlx);
 }
 
-void	esc_hook(mlx_key_data_t keydata, void* param)
+void	esc_hook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
@@ -55,4 +55,3 @@ void	esc_hook(mlx_key_data_t keydata, void* param)
 		exit(EXIT_SUCCESS);
 	}
 }
-
