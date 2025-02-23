@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 17:17:12 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/22 17:47:40 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 18:52:43 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,23 @@ void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 	int		err;
 	t_pixel	p;
 
-	p.x = rounded(p0->x);
-	p.y = rounded(p0->y);
-	err = abs(rounded(p1->x) - rounded(p0->x))
-		- abs(rounded(p1->y) - rounded(p0->y));
-	while (true)
+	p.x = p0->x;
+	p.y = p0->y;
+	err = abs(p1->x - p0->x) - abs(p1->y - p0->y);
+	while (p.x != p1->x && p.y != p1->y)
 	{
-		mlx_put_pixel(env.img, p.x, p.y, p0->color);
-		if (err * 2 > -abs(rounded(p1->y) - rounded(p0->y)))
+		mlx_put_pixel(env.img, p.x, p.y, get_mid_color(*p0, p, *p1));
+		if (err * 2 > -abs(p1->y - p0->y))
 		{
-			if (p.x == rounded(p1->x))
-				break ;
-			err -= abs(rounded(p1->y) - rounded(p0->y));
-			p.x += (rounded(p0->x) < rounded(p1->x));
-			p.x -= (rounded(p0->x) > rounded(p1->x));
+			err -= abs(p1->y - p0->y);
+			p.x += (p0->x < p1->x);
+			p.x -= (p0->x > p1->x);
 		}
-		if (err * 2 < abs(rounded(p1->x) - rounded(p0->x)))
+		if (err * 2 < abs(p1->x - p0->x))
 		{
-			if (p.y == rounded(p1->y))
-				break ;
-			err += abs(rounded(p1->x) - rounded(p0->x));
-			p.y += (rounded(p0->y) < rounded(p1->y));
-			p.y -= (rounded(p0->y) > rounded(p1->y));
+			err += abs(p1->x - p0->x);
+			p.y += (p0->y < p1->y);
+			p.y -= (p0->y > p1->y);
 		}
 	}
 }
@@ -64,11 +59,9 @@ void	draw_horizontal(t_env env)
 		j = 0;
 		while (j < env.size_x - 1)
 		{
-			p0 = scale(env.points[j + i * env.size_x], env);
-			p1 = scale(env.points[j + i * env.size_x + 1], env);
+			p0 = env.pixels[j + i * env.size_x];
+			p1 = env.pixels[j + i * env.size_x + 1];
 			draw_line(env, p0, p1);
-			free(p0);
-			free(p1);
 			j++;
 		}
 		i++;
@@ -88,11 +81,9 @@ void	draw_vertical(t_env env)
 		j = 0;
 		while (j < env.size_x)
 		{
-			p0 = scale(env.points[j + i * env.size_x], env);
-			p1 = scale(env.points[j + (i + 1) * env.size_x], env);
+			p0 = env.pixels[j + i * env.size_x];
+			p1 = env.pixels[j + (i + 1) * env.size_x];
 			draw_line(env, p0, p1);
-			free(p0);
-			free(p1);
 			j++;
 		}
 		i++;

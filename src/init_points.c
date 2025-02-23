@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/22 17:53:02 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 18:57:41 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, uint32_t color)
 	return (p);
 }
 
-t_pixel	*new_pixel(double x, double y, uint32_t color)
+t_2dpoint	*new_2dpoint(double x, double y, uint32_t color)
 {
-	t_pixel	*p;
+	t_2dpoint	*p;
 
-	p = (t_pixel *)malloc(sizeof(t_pixel));
+	p = (t_2dpoint *)malloc(sizeof(t_2dpoint));
 	if (!p)
 		return (NULL);
 	p->x = x;
@@ -62,8 +62,9 @@ t_3dpoint	**get_points_3d(int fd, int size)
 		coord_x = 0;
 		while (line[coord_x])
 		{
-			points[i++] = new_3dpoint(coord_x, coord_y, ft_atoi(line[coord_x]),
-					get_color(line[coord_x]));
+			if (ft_strncmp(line[coord_x], "\n", 1) != 0)
+				points[i++] = new_3dpoint(coord_x, coord_y,
+						ft_atoi(line[coord_x]), get_color(line[coord_x]));
 			coord_x++;
 		}
 		coord_y++;
@@ -84,22 +85,22 @@ char	**get_map_line(int fd)
 	return (coord_line);
 }
 
-t_pixel	**iso_transform(t_3dpoint **arr_3d, double a, int size)
+t_2dpoint	**iso_transform(t_3dpoint **arr_3d, double a, int size)
 {
-	t_pixel		**points;
+	t_2dpoint	**points;
 	t_3dpoint	*p;
 	int			i;
 
 	if (!arr_3d)
 		return (NULL);
-	points = (t_pixel **)malloc(size * sizeof(t_pixel *));
+	points = (t_2dpoint **)malloc(size * sizeof(t_2dpoint *));
 	if (!points)
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
 		p = arr_3d[i];
-		points[i] = new_pixel((p->x * cos(dtr(a))) + (p->y * cos(dtr(a) + 2))
+		points[i] = new_2dpoint((p->x * cos(dtr(a))) + (p->y * cos(dtr(a) + 2))
 				+ (p->z * cos(dtr(a) - 2)),
 				p->x * sin(dtr(a)) + p->y * sin(dtr(a) + 2)
 				+ p->z * sin(dtr(a) - 2), p->color);

@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:46:40 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/22 17:54:16 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 14:41:04 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@
 int	num_arguments(char *line)
 {
 	int		i;
+	int		count;
 	char	**points;
 
 	i = 0;
+	count = 0;
 	points = ft_split(line, ' ');
 	while (points[i])
+	{
+		if (ft_strncmp(points[i], "\n", 1) != 0)
+			count++;
 		i++;
+	}
 	clear_array(points);
-	return (i);
+	return (count);
 }
 
 static int	validate_extension(char *file_name)

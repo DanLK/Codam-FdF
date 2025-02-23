@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 12:34:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/22 17:49:05 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 18:58:56 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	paint_map(t_env env)
 {
 	mlx_t		*mlx;
 	int			i;
-	t_pixel		*pixel;
 
 	mlx = mlx_init(env.width, env.height, "FdF", true);
 	if (!mlx)
@@ -32,12 +31,11 @@ void	paint_map(t_env env)
 	if (!env.img || (mlx_image_to_window(mlx, env.img, 0, 0) < 0))
 		graphics_error();
 	i = 0;
+	env.pixels = points_to_pixels(env);
 	while (i < env.size_x * env.size_y)
 	{
-		pixel = scale(env.points[i], env);
-		mlx_put_pixel(env.img, rounded(pixel->x), rounded(pixel->y),
-			pixel->color);
-		free(pixel);
+		mlx_put_pixel(env.img, env.pixels[i]->x, env.pixels[i]->y,
+			env.pixels[i]->color);
 		i++;
 	}
 	draw_horizontal(env);
@@ -45,6 +43,7 @@ void	paint_map(t_env env)
 	mlx_key_hook(mlx, &esc_hook, &env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	clear_pixel_grid(env.pixels, env.size_x * env.size_y);
 }
 
 void	esc_hook(mlx_key_data_t keydata, void *param)

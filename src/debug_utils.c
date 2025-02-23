@@ -1,49 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   debug.c                                            :+:    :+:            */
+/*   debug_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/02/07 15:55:59 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:07:42 by dloustal      ########   odam.nl         */
+/*   Created: 2025/02/23 19:06:22 by dloustal      #+#    #+#                 */
+/*   Updated: 2025/02/23 19:07:51 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-void	print_3d_array(t_3dpoint **p, int size)
+void	print_3d_point(t_3dpoint p)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		print_3d_point(*p[i]);
-		i++;
-	}
+	ft_printf("(%d, %d, %d)\n", p.x, p.y, p.z);
 }
 
-void	print_2d_array(t_2dpoint **p, int size)
+void	print_2d_point(t_2dpoint p)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		print_2d_point(*p[i]);
-		i++;
-	}
+	printf("(%f, %f) -- %d\n", p.x, p.y, p.color);
 }
 
-void	print_pixels(t_pixel **p, int size)
+void	print_pixel(t_pixel p)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		print_pixel(*p[i]);
-		i++;
-	}
+	ft_printf("(%d, %d)\n", p.x, p.y);
 }
