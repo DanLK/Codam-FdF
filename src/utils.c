@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/23 19:03:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:10:10 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:09:34 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	is_sign(char c)
 double	dtr(double alpha)
 {
 	return (alpha * (M_PI / 180));
+}
+
+int	rounded(double n)
+{
+	return ((int)(n + 0.5));
 }
 
 /* Scales and centers the points */

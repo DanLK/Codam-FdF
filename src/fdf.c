@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:28 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:52:42 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:11:26 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#define WIDTH 2048
-#define HEIGHT 1536
 
 int	main(int argc, char **argv)
 {
@@ -27,7 +25,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Must pass an argument\n");
+		ft_printf("Must pass an argument\n");
 		return (EXIT_FAILURE);
 	}
 	fd = open(argv[1], O_RDONLY);

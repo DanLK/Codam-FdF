@@ -6,18 +6,12 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 17:17:12 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:35:39 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:09:17 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
-#include <stdio.h>
-
-int	rounded(double n)
-{
-	return ((int)(n + 0.5));
-}
 
 /* Bresenham*/
 void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
@@ -92,4 +86,10 @@ void	draw_vertical(t_env env)
 		}
 		i++;
 	}
+}
+
+void	draw_grid(t_env env)
+{
+	draw_horizontal(env);
+	draw_vertical(env);
 }

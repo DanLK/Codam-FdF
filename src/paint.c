@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 12:34:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:51:52 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:08:26 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	paint_map(t_env env)
 			env.pixels[i]->color);
 		i++;
 	}
-	draw_horizontal(env);
-	draw_vertical(env);
+	draw_grid(env);
 	mlx_key_hook(mlx, &esc_hook, &env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

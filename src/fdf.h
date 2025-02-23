@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:51:06 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:09:46 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		esc_hook(mlx_key_data_t keydata, void *param);
 void		draw_line(t_env env, t_pixel *p0, t_pixel *p1);
 void		draw_horizontal(t_env env);
 void		draw_vertical(t_env env);
-int			rounded(double n);
+void		draw_grid(t_env env);
 
 //Color
 uint32_t	get_color(char *str);
@@ -97,6 +97,7 @@ double		get_ratio(t_pixel start, t_pixel mid, t_pixel end);
 //Utils
 int			is_sign(char c);
 double		dtr(double alpha);
+int			rounded(double n);
 t_pixel		*scale(t_2dpoint *point, t_env env);
 
 // Memory clears

@@ -6,13 +6,12 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:37:12 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 20:06:23 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <math.h>
 
