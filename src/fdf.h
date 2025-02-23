@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/06 17:39:48 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:09:39 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 19:51:06 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ t_env		init_env(int fd, int size_x, int size_y);
 t_pixel		*new_pixel(int x, int y, uint32_t color);
 t_pixel		**points_to_pixels(t_env env);
 
-// Scale points
-t_pixel		*scale(t_2dpoint *point, t_env env);
-
 // Paint map
 void		paint_map(t_env env);
 void		esc_hook(mlx_key_data_t keydata, void *param);
@@ -100,6 +97,7 @@ double		get_ratio(t_pixel start, t_pixel mid, t_pixel end);
 //Utils
 int			is_sign(char c);
 double		dtr(double alpha);
+t_pixel		*scale(t_2dpoint *point, t_env env);
 
 // Memory clears
 void		clear_array(char **args);

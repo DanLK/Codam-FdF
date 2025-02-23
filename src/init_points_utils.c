@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/11 18:35:45 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:09:09 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 19:48:50 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_env	init_env(int fd, int size_x, int size_y)
 	env.points = iso_transform(env.map_coord, 30, size_x * size_y);
 	get_x_minmax(env.points, size_x * size_y, &env.x_min, &env.x_max);
 	get_y_minmax(env.points, size_x * size_y, &env.y_min, &env.y_max);
-	env.width = 2048;
-	env.height = 1024 + 512;
+	env.width = 1024 + 512;
+	env.height = 1024 + 256;
 	return (env);
 }

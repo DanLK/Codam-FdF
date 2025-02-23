@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/22 14:03:05 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 19:04:51 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 19:24:53 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,13 @@ uint32_t	str_to_color(char *str)
 	int	b;
 	int	a;
 
-	if (!str)
-		return (-1);
+	r = 0;
+	g = 0;
+	a = 255;
 	if (ft_strlen(str) <= 2)
-	{
-		r = 0;
-		g = 0;
 		b = get_color_component(str, 0);
-	}
 	else if (ft_strlen(str) <= 4)
 	{
-		r = 0;
 		g = get_color_component(str, 0);
 		b = get_color_component(str, 2);
 	}
@@ -68,9 +64,7 @@ uint32_t	str_to_color(char *str)
 		g = get_color_component(str, 2);
 		b = get_color_component(str, 4);
 	}
-	if (ft_strlen(str) <= 6 || (str[6] && str[6] == '\n'))
-		a = 255;
-	else
+	if (ft_strlen(str) == 8)
 		a = get_color_component(str, 6);
 	return (r << 24 | g << 16 | b << 8 | a);
 }

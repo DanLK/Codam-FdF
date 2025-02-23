@@ -6,16 +6,16 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 12:34:23 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 18:58:56 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/23 19:51:52 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+#include <unistd.h>
 
 static void	graphics_error(void)
 {
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	ft_putendl_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 

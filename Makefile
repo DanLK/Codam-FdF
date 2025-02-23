@@ -44,6 +44,6 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_PATH) fclean
 
-re: clean all
+re: fclean all
 
 .PHONY: all clean fclean re libmlx practice test
