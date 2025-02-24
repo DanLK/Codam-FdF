@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/17 17:17:12 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:09:17 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/24 11:31:51 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,26 @@
 /* Bresenham*/
 void	draw_line(t_env env, t_pixel *p0, t_pixel *p1)
 {
-	int		err;
+	int		err[2];
 	t_pixel	p;
 
 	p.x = p0->x;
 	p.y = p0->y;
-	err = abs(p1->x - p0->x) - abs(p1->y - p0->y);
-	while (true)
+	err[0] = abs(p1->x - p0->x) - abs(p1->y - p0->y);
+	while (p.x != p1->x || p.y != p1->y)
 	{
-		mlx_put_pixel(env.img, p.x, p.y, get_mid_color(*p0, p, *p1));
-		if (err * 2 > -abs(p1->y - p0->y))
+		if ((uint32_t)p.x < env.img->width && (uint32_t)p.y < env.img->height)
+			mlx_put_pixel(env.img, p.x, p.y, get_mid_color(*p0, p, *p1));
+		err[1] = 2 * err[0];
+		if (err[1] > -abs(p1->y - p0->y))
 		{
-			if (p.x == p1->x)
-				break ;
-			err -= abs(p1->y - p0->y);
+			err[0] -= abs(p1->y - p0->y);
 			p.x += (p0->x < p1->x);
 			p.x -= (p0->x > p1->x);
 		}
-		if (err * 2 < abs(p1->x - p0->x))
+		if (err[1] < abs(p1->x - p0->x))
 		{
-			if (p.y == p1->y)
-				break ;
-			err += abs(p1->x - p0->x);
+			err[0] += abs(p1->x - p0->x);
 			p.y += (p0->y < p1->y);
 			p.y -= (p0->y > p1->y);
 		}

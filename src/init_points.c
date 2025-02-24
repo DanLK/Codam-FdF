@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/07 15:39:26 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/23 20:06:23 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/24 11:14:27 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ t_2dpoint	*new_2dpoint(double x, double y, uint32_t color)
 t_3dpoint	**get_points_3d(int fd, int size)
 {
 	t_3dpoint	**points;
-	int			coord_x;
-	int			coord_y;
+	int			coords[2];
 	char		**line;
 	int			i;
 
@@ -54,19 +53,18 @@ t_3dpoint	**get_points_3d(int fd, int size)
 	if (!points)
 		return (NULL);
 	line = get_map_line(fd);
-	coord_y = 0;
+	coords[1] = 0;
 	i = 0;
 	while (line)
 	{
-		coord_x = 0;
-		while (line[coord_x])
+		coords[0] = -1;
+		while (line[++coords[0]])
 		{
-			if (ft_strncmp(line[coord_x], "\n", 1) != 0)
-				points[i++] = new_3dpoint(coord_x, coord_y,
-						ft_atoi(line[coord_x]), get_color(line[coord_x]));
-			coord_x++;
+			if (ft_strncmp(line[coords[0]], "\n", 1) != 0)
+				points[i++] = new_3dpoint(coords[0], coords[1],
+						ft_atoi(line[coords[0]]), get_color(line[coords[0]]));
 		}
-		coord_y++;
+		coords[1]++;
 		clear_array(line);
 		line = get_map_line(fd);
 	}
