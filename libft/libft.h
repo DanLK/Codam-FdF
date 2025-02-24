@@ -6,7 +6,7 @@
 /*   By: dloustal <dloustal@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/08 13:58:09 by dloustal      #+#    #+#                 */
-/*   Updated: 2025/02/14 14:47:59 by dloustal      ########   odam.nl         */
+/*   Updated: 2025/02/24 12:29:28 by dloustal      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,21 +113,21 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // PRINTF
 
-int	ft_printc(char c);
+int		ft_printc(char c);
 
-int	ft_prints(char *str);
+int		ft_prints(char *str);
 
-int	ft_printp(void	*ptr);
+int		ft_printp(void	*ptr);
 
-int	ft_printd(int x);
+int		ft_printd(int x);
 
-int	ft_printu(unsigned int x);
+int		ft_printu(unsigned int x);
 
-int	ft_printx(unsigned int x, char spec);
+int		ft_printx(unsigned int x, char spec);
 
-int	ft_print_percent(void);
+int		ft_print_percent(void);
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 // GNL
 
