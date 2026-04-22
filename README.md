@@ -8,3 +8,18 @@ The program receives as input a text file with extension .fdf that represents po
 	<img src="./img/Screenshot_map.png" width="500" height="400" alt="GIF" style="float: center;">
 	<figcaption>Example of an .fdf file</figcaption>
 </figure>
+
+To run, make the project with ``` make ``` and run  ``` ./fdf <file-path> ```
+
+Examples of rendered maps are:
+
+
+<figure>
+	<img src="./img/fdf-42.png" width="500" height="400" alt="GIF" style="float: center;">
+	<figcaption>Rendering of previous map (42.fdf)</figcaption>
+</figure>
+
+<figure>
+	<img src="./img/fdf-fract.png" width="500" height="400" alt="GIF" style="float: center;">
+	<figcaption>From elem-fract.fdf</figcaption>
+</figure>
